@@ -4,7 +4,7 @@ createApp({
   data() {
     return {
       // Chat di default indice 0
-      //   activeIndex: 0,
+      activeIndex: 0,
 
       contacts: [
         {
@@ -172,5 +172,9 @@ createApp({
     };
   },
 
-  methods: {},
+  methods: {
+    chooseConversation: function (clickIndex) {
+      this.activeIndex = clickIndex;
+    },
+  },
 }).mount("#app");
