@@ -59,9 +59,10 @@
             id="contacts-filter"
             class="left-searchbar-input"
             placeholder="Cerca o inizia una nuova chat"
-            name="search"  @keyup="searchContact"
+            name="search"  @input="searchContact"
             v-model="search"
           />
+          <!-- @keyup="searchContact"" -->
         </div>
 
         <div class="contacts" >
@@ -135,7 +136,7 @@
                   </div>
                 </div>
               </div>
-              <span class="message-time">16:13</span>
+              <span class="message-time">{{curMessage.date}}</span>
             </div>
 
             <!-- MESSAGE RECEIVED -->

@@ -17,7 +17,10 @@
 // const now = luxon.DateTime.now(); //Object quindi lo devo formattare in stringa  --> data e ora si avviano alla pagina quindi lo dobbiamo inserire all' invio del messaggio! (ricorda questo è un dato statico --> lo devo generare al click)
 // console.log(now.toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS));
 
+
+
 const { createApp } = Vue;
+const dt = luxon.DateTime;
 
 createApp({
   data() {
@@ -28,7 +31,7 @@ createApp({
       search: "",
       //variabile per savare i nuovi messaggi inviati
       newMessage: {
-        date: "da cambiare",
+        date: dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
         message: "",
         status: "sent",
       },
@@ -205,16 +208,18 @@ createApp({
     },
 
     sendMessage: function () {
+    //evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
       if (this.newMessage.message.trim() === "") return;
       const copyContact = { ...this.newMessage };
       this.contacts[this.activeIndex].messages.push(copyContact);
       this.newMessage.message = "";
       console.log(this.contacts[this.activeIndex].messages);
 
+
       // Simulazione risposta dopo 1 secondo
       setTimeout(() => {
         const response = {
-          date: "da cambiare",
+          date: dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
           message: "Ok",
           status: "received",
         };
@@ -233,11 +238,12 @@ createApp({
         }
       });
     },
-    
-    // splice = cancella il messaggio selezionato
+
+    // splice = cancella il messaggio selezionato. Modifica l'array originale e restituisce un array contenente gli elementi rimossi, se ce ne sono. Se non vengono rimossi elementi, restituisce un array vuoto.
     //Parametri = l'indice del contatto e l'indice del messaggio da cancellare 1= un solo messaggio da cancellare se 2= cancella quello selezionato ed il successivo
-    deleteMessage: function(clickedIndex, activeIndex) {
-       this.contacts[activeIndex].messages.splice(clickedIndex, 1)
-      }
+    deleteMessage: function (clickedIndex, activeIndex) {
+      this.contacts[activeIndex].messages.splice(clickedIndex, 1);
+    },
+
   },
 }).mount("#app");
