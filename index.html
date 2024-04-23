@@ -70,9 +70,10 @@
             @click="chooseConversation(index)"
           >
             <div class="contact-logo">
+              <!-- Posso usare anche la concatenazione + invece del ` ` -->
               <img
                 :src="`assets/img/avatar${curUser.avatar}.jpg`"
-                alt="Avatar"
+                :alt="`Avatar ${curUser.name}`"
               />
             </div>
             <div class="contact-info">
@@ -93,9 +94,15 @@
       <div class="right">
         <div class="header-right">
           <div class="header-right-logo">
-            <img src="assets/img/avatar_1.jpg" alt="" />
+            <img
+            :src="`assets/img/avatar${contacts[activeIndex].avatar}.jpg`"
+              alt=""
+            />
             <h3>
-              <span id="header-right-contact-name">Michele</span> <br />
+              <span id="header-right-contact-name"
+                >{{contacts[activeIndex].name}}</span
+              >
+              <br />
               <small class="time">Ultimo accesso oggi alle 16:26</small>
             </h3>
           </div>
@@ -106,7 +113,6 @@
           </div>
         </div>
         <div class="right-messages-container">
-            
           <!-- CHAT -->
           <!-- Si deve aprire al click questo contenitore -->
           <div class="right-messages">
@@ -157,7 +163,12 @@
           <div class="right-footer-icon">
             <i class="far fa-smile"></i>
           </div>
-          <input class="new-message-inputs" placeholder="Scrivi un messaggio" />
+          <input
+            class="new-message-inputs"
+            placeholder="Scrivi un messaggio"
+            v-model="newMessage.message"
+            @keyup.enter="sendMessage"
+          />
           <div class="right-footer-icon">
             <i class="fa fa-microphone" aria-hidden="true"></i>
           </div>
@@ -165,6 +176,9 @@
       </div>
       <!-- /contenitore dx -->
     </div>
+
+    <!-- Luxon -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
 
     <!-- JS -->
     <script src="./assets/data.js"></script>

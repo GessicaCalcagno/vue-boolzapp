@@ -1,3 +1,22 @@
+// const dt = luxon.DateTime;
+// // FORMAT
+// console.log(dt.now());
+// const now = dt.now(); // object --> data e ora dell'avvio della pagina 10:38:23
+// console.log(now.setLocale('it').toLocaleString(dt.DATETIME_HUGE));
+// // PARSE
+// const dateString = "14/10/1985"; // string
+// const dateLuxon = dt.fromFormat(dateString, "dd/MM/yyyy");
+// console.log(dateLuxon);
+// // FORMAT
+// console.log(dateLuxon.toLocaleString(dt.DATETIME_HUGE));
+
+// //non possiamo fare const {DateTime} = luxon?
+// console.log(luxon.DateTime.now());
+
+// //luxon.DateTime devo iniziare sempre cosi
+// const now = luxon.DateTime.now(); //Object quindi lo devo formattare in stringa  --> data e ora si avviano alla pagina quindi lo dobbiamo inserire all' invio del messaggio! (ricorda questo è un dato statico --> lo devo generare al click)
+// console.log(now.toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS));
+
 const { createApp } = Vue;
 
 createApp({
@@ -5,6 +24,12 @@ createApp({
     return {
       // Chat di default indice 0
       activeIndex: 0,
+      //variabile per savare i nuovi messaggi inviati
+      newMessage: {
+        date: "da cambiare",
+        message: "",
+        status: "sent",
+      },
 
       contacts: [
         {
@@ -175,6 +200,24 @@ createApp({
   methods: {
     chooseConversation: function (clickIndex) {
       this.activeIndex = clickIndex;
+    },
+
+    sendMessage: function () {
+      if (this.newMessage.message.trim() === "") return;
+      const copyContact = { ...this.newMessage };
+      this.contacts[this.activeIndex].messages.push(copyContact);
+      this.newMessage.message = "";
+      console.log(this.contacts[this.activeIndex].messages);
+
+      // Simulazione risposta dopo 1 secondo
+      setTimeout(() => {
+        const response = {
+          date: "da cambiare",
+          message: "Ok",
+          status: "received",
+        };
+        this.contacts[this.activeIndex].messages.push(response);
+      }, 1000);
     },
   },
 }).mount("#app");
