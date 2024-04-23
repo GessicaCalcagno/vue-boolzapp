@@ -17,8 +17,6 @@
 // const now = luxon.DateTime.now(); //Object quindi lo devo formattare in stringa  --> data e ora si avviano alla pagina quindi lo dobbiamo inserire all' invio del messaggio! (ricorda questo è un dato statico --> lo devo generare al click)
 // console.log(now.toLocaleString(luxon.DateTime.DATETIME_SHORT_WITH_SECONDS));
 
-
-
 const { createApp } = Vue;
 const dt = luxon.DateTime;
 
@@ -35,6 +33,17 @@ createApp({
         message: "",
         status: "sent",
       },
+
+      // Alcune frasi/citazioni da prendere random
+      quotes: [
+        "Nel mezzo della difficoltà risiede l'opportunità",
+        "Capito!",
+        "Fatto!",
+        "Non sono pigro, sono un developer",
+        "Okidoki!",
+        "Ricevuto!",
+        "Eseguito!",
+      ],
 
       contacts: [
         {
@@ -208,19 +217,24 @@ createApp({
     },
 
     sendMessage: function () {
-    //evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
+      //evitare che l'utente possa inviare un messaggio vuoto o composto solamente da spazi
       if (this.newMessage.message.trim() === "") return;
       const copyContact = { ...this.newMessage };
       this.contacts[this.activeIndex].messages.push(copyContact);
       this.newMessage.message = "";
       console.log(this.contacts[this.activeIndex].messages);
 
+      // FRASI/CITAZIONI CASUALI DALL'ARRAY QUOTES
+      const randomIndex = Math.floor(Math.random() * this.quotes.length);
+      const randomQuote = this.quotes[randomIndex];
 
       // Simulazione risposta dopo 1 secondo
       setTimeout(() => {
         const response = {
+          //aggiungo date.now()
           date: dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
-          message: "Ok",
+          //aggiungo all'invio un quote random
+          message: randomQuote,
           status: "received",
         };
         this.contacts[this.activeIndex].messages.push(response);
@@ -244,6 +258,5 @@ createApp({
     deleteMessage: function (clickedIndex, activeIndex) {
       this.contacts[activeIndex].messages.splice(clickedIndex, 1);
     },
-
   },
 }).mount("#app");
