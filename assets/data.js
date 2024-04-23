@@ -24,6 +24,8 @@ createApp({
     return {
       // Chat di default indice 0
       activeIndex: 0,
+      //Variabile per la ricerca del contatto
+      search: "",
       //variabile per savare i nuovi messaggi inviati
       newMessage: {
         date: "da cambiare",
@@ -218,6 +220,18 @@ createApp({
         };
         this.contacts[this.activeIndex].messages.push(response);
       }, 1000);
+    },
+
+    searchContact: function () {
+      // Utilizziamo forEach per iterare attraverso ogni contatto nella lista dei contatti
+      this.contacts.forEach((curContact) => {
+        const userName = curContact.name.toLowerCase();
+        if (userName.includes(this.search)) {
+          curContact.visible = true;
+        } else {
+          curContact.visible = false;
+        }
+      });
     },
   },
 }).mount("#app");

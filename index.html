@@ -59,13 +59,14 @@
             id="contacts-filter"
             class="left-searchbar-input"
             placeholder="Cerca o inizia una nuova chat"
-            name="search"
+            name="search"  @keyup="searchContact"
+            v-model="search"
           />
         </div>
 
-        <div class="contacts">
+        <div class="contacts" >
           <div
-            class="contact"
+            class="contact" v-show="curUser.visible"
             v-for="(curUser, index) in contacts"
             @click="chooseConversation(index)"
           >
