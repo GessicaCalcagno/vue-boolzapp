@@ -29,7 +29,7 @@ createApp({
       search: "",
       //variabile per savare i nuovi messaggi inviati
       newMessage: {
-        date: dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
+        date: "",
         message: "",
         status: "sent",
       },
@@ -42,7 +42,7 @@ createApp({
         "Non sono pigro, sono un developer",
         "Okidoki!",
         "Ricevuto!",
-        "Eseguito!",
+        "No!",
       ],
 
       contacts: [
@@ -221,6 +221,8 @@ createApp({
       if (this.newMessage.message.trim() === "") return;
       const copyContact = { ...this.newMessage };
       this.contacts[this.activeIndex].messages.push(copyContact);
+      //Imposto la data al momento dell'invio
+      copyContact.date = dt.now().toLocaleString(dt.DATETIME_SHORT_WITH_SECONDS),
       this.newMessage.message = "";
       console.log(this.contacts[this.activeIndex].messages);
 
