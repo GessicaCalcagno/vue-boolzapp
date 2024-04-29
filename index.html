@@ -84,7 +84,7 @@
               <h3>
                 <span class="contact-name">{{curUser.name}}</span>
 
-                <!-- DA MODIFICARE -->
+                <!-- Controllo se ci sono messaggi nell'array messages di curUser. Se la lunghezza dell'array è diversa da zero, il blocco di codice contenuto nell'elemento viene mostrato. In caso contrario, l'elemento viene nascosto. -->
                 <span class="time" v-if="curUser.messages.length !== 0"
                   >{{curUser.messages[curUser.messages.length-1].date}}</span
                 >
