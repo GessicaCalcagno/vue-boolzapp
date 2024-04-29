@@ -214,6 +214,7 @@ createApp({
   methods: {
     chooseConversation: function (clickIndex) {
       this.activeIndex = clickIndex;
+      console.log(clickIndex);
     },
 
     sendMessage: function () {
@@ -230,6 +231,8 @@ createApp({
       const randomIndex = Math.floor(Math.random() * this.quotes.length);
       const randomQuote = this.quotes[randomIndex];
 
+      // Salva l'indice in una variabile
+      const responseIndex = this.activeIndex
       // Simulazione risposta dopo 1 secondo
       setTimeout(() => {
         const response = {
@@ -239,7 +242,8 @@ createApp({
           message: randomQuote,
           status: "received",
         };
-        this.contacts[this.activeIndex].messages.push(response);
+        this.contacts[responseIndex].messages.push(response);
+        
       }, 1000);
     },
 
@@ -262,3 +266,8 @@ createApp({
     },
   },
 }).mount("#app");
+
+
+//Devo modificare l'indice perchè se cambio subito chat invia la risposta alla chat sbagliata
+
+//Non si cancellano tuttìi i messsaggi

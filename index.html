@@ -85,9 +85,14 @@
                 <span class="contact-name">{{curUser.name}}</span>
 
                 <!-- DA MODIFICARE -->
-                <span class="time">16:15</span>
+                <span class="time">{{curUser.messages[curUser.messages.length -
+                  1].date}}</span>
               </h3>
-              <small>{{curUser.messages[0].message}}</small>
+              <!-- Visualizzo solo l'ultimo messaggio -->
+              <small
+                >{{curUser.messages[curUser.messages.length -
+                1].message}}</small
+              >
             </div>
           </div>
         </div>
