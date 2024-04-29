@@ -263,6 +263,7 @@ createApp({
     //Parametri = l'indice del contatto e l'indice del messaggio da cancellare 1= un solo messaggio da cancellare se 2= cancella quello selezionato ed il successivo
     deleteMessage: function (clickedIndex, activeIndex) {
       this.contacts[activeIndex].messages.splice(clickedIndex, 1);
+      // this.messages.message = [];
     },
   },
 }).mount("#app");

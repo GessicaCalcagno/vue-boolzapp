@@ -85,13 +85,13 @@
                 <span class="contact-name">{{curUser.name}}</span>
 
                 <!-- DA MODIFICARE -->
-                <span class="time">{{curUser.messages[curUser.messages.length -
-                  1].date}}</span>
+                <span class="time" v-if="curUser.messages.length !== 0"
+                  >{{curUser.messages[curUser.messages.length-1].date}}</span
+                >
               </h3>
               <!-- Visualizzo solo l'ultimo messaggio -->
-              <small
-                >{{curUser.messages[curUser.messages.length -
-                1].message}}</small
+              <small v-if="curUser.messages.length !== 0"
+                >{{curUser.messages[curUser.messages.length-1].message}}</small
               >
             </div>
           </div>
